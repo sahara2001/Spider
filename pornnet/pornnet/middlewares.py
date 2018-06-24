@@ -6,7 +6,7 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
-from user_agents import agents
+from pornnet.user_agents import agents
 import json
 import random
 
