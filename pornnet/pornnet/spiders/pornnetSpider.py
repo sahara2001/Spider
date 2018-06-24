@@ -11,8 +11,8 @@ import json
 import random
 
 
-class MissSpider(CrawlSpider):
-    name = 'MissSpider'
+class Spider(CrawlSpider):
+    name = 'pornnetSpider'
     host = 'https://pornhub.com'
     start_urls = list(set(Pornhub_Types)) # redundant urls and start_requests
     logging.getLogger("requests").setLevel(logging.WARNING)
