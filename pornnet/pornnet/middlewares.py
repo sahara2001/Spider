@@ -6,6 +6,38 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from user_agents import agents
+import json
+import random
+
+
+class UserAgentMiddleware(object):
+    """ 换User-Agent """
+
+    def process_request(self, request, spider):
+        agent = random.choice(agents)
+        request.headers["User-Agent"] = agent
+
+class CookiesMiddleware(object):
+    """
+    change cookie
+    """
+    cookie = {
+        'platform': 'pc',
+        'ss':'167701188698225489',
+        'bs': '%s',
+        'RNLBSERVERID': 'deb6699',
+        'FastPopSessionRequestNumber':'1',
+        'FPSRN':'a',
+        'performance_timing':'home',
+        'RNKEY':'40859743*68067497:1190152786:3363277230:1'
+    }
+    def process_request(self, request, spider):
+        bs = ''
+        for i in range(32):
+            bs += chr(random.randint(97,122))
+        _cookie = json.dumps(self.cookie) % bs
+        request.cookies = json.loads(_cookie)
 
 
 class PornnetSpiderMiddleware(object):
@@ -26,6 +58,8 @@ class PornnetSpiderMiddleware(object):
 
         # Should return None or raise an exception.
         return None
+    
+    
 
     def process_spider_output(self, response, result, spider):
         # Called with the results returned from the Spider, after
